@@ -88,3 +88,15 @@ module.exports.destroyListing = async (req, res) => {
   req.flash("success", "Listing Deleted!");
   res.redirect("/listings");
 };
+
+module.exports.listingByCategory = async (req, res, next) => {
+  try {
+    const { details } = req.params;
+    const listByCategory = await Listing.find({ category: details });
+
+    res.render("listings/category.ejs", { details, listByCategory });
+  } catch (err) {
+    console.error("Error in listingByCategory:", err);
+    res.status(500).send("Something went wrong! Please try again later.");
+  }
+};
