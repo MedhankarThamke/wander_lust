@@ -49,6 +49,6 @@ router.get(
 // listing / category / Rooms;
 router.get("/category/:details", (req, res) => {
   res.send("working!! well");
-  console.log("working?");
+  console.log("working  ?");
 });
 module.exports = router;
