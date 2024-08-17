@@ -1,0 +1,115 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<body>
+  <div class="row mt-3">
+    <div class="col-8 offset-2">
+      <h2>Create new listing!</h2>
+      <form
+        method="post"
+        action="/listings"
+        novalidate
+        class="needs-validation"
+        enctype="multipart/form-data"
+      >
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input
+            name="listing[title]"
+            placeholder="Enter your title!"
+            type="text"
+            class="form-control"
+            required
+          />
+          <!-- the below wil only be displayed if title input is okay -->
+          <div class="valid-feedback">Title's good</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            name="listing[description]"
+            placeholder="enter the description"
+            type="text"
+            class="form-control"
+            required
+          ></textarea>
+          <div class="invalid-feedback">Enter the short Description!</div>
+        </div>
+
+        <div class="mb-3 dropdown">
+          <label for="listingCategory" class="form-label">Details</label>
+          <select
+            name="listing[category]"
+            class="dropdown-toggle form-control"
+            required
+          >
+            <option class="dropdown-item">Please choose an option</option>
+            <option value="Rooms" class="dropdown-item">Rooms</option>
+            <option value="Iconic Cities" class="dropdown-item">
+              Iconic Cities
+            </option>
+            <option value="Castle" class="dropdown-item">Castle</option>
+            <option value="Beach" class="dropdown-item">Beach</option>
+            <option value="Camping" class="dropdown-item">Camping</option>
+            <option value="Farms" class="dropdown-item">Farms</option>
+            <option value="Arctic" class="dropdown-item">Arctic</option>
+            <option value="miscellaneous" class="dropdown-item">
+              miscellaneous
+            </option>
+          </select>
+          <div class="invalid-feedback">Enter the details!</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="image" class="form-label">Upload Listing Image</label>
+          <input
+            name="listing[image]"
+            type="file"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div class="row">
+          <div class="mb-3 col-md-4">
+            <label for="price" class="form-label">Price</label>
+            <input
+              name="listing[price]"
+              placeholder="10,000"
+              class="form-control"
+              required
+            />
+            <div class="invalid-feedback">Price should be valid!</div>
+          </div>
+
+          <div class="mb-3 col-md-8">
+            <label for="country" class="form-label">Country</label>
+            <input
+              name="listing[country]"
+              placeholder="Eg. India"
+              type="text"
+              class="form-control"
+              required
+            />
+            <div class="invalid-feedback">Country name should be valid!</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input
+            name="listing[location]"
+            placeholder="Eg. Chandrapur"
+            type="text"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Location should be valid!</div>
+        </div>
+
+        <button class="btn btn-dark add-btn mt-3">submit</button>
+        <br /><br />
+      </form>
+    </div>
+  </div>
+</body>
