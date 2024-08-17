@@ -43,5 +43,9 @@ router.get(
 
 // show category form
 // listing / category / Rooms;
-router.get("/category/:details", listingController.listingByCategory);
+router.get(
+  "/category/:details",
+  wrapAsync(listingController.listingByCategory)
+);
+
 module.exports = router;

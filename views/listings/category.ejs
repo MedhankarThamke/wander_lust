@@ -1,5 +1,5 @@
 <% layout("/layouts/boilerplate.ejs") %>
-
+<%-include("../includes/category.ejs")%>
 <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
   <% if (listByCategory && listByCategory.length > 0) { %> <%
   listByCategory.forEach(listing => { %>
