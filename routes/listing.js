@@ -48,6 +48,7 @@ router.get(
 // show category form
 // listing / category / Rooms;
 router.get("/category/:details", (req, res) => {
-  res.send("working!!");
+  res.send("working!! well");
+  console.log("working?");
 });
 module.exports = router;
