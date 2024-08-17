@@ -8,10 +8,6 @@ const multer = require("multer");
 const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage });
 
-router.get("/category/:details", (req, res) => {
-  res.send("working!!!");
-});
-
 // show all listing and add listing
 router.route("/").get(wrapAsync(listingController.index)).post(
   isLoggedIn,
@@ -48,7 +44,7 @@ router.get(
 // show category form
 // listing / category / Rooms;
 router.get("/category/:details", (req, res) => {
-  res.send("working!! well");
+  res.send("okkk");
   console.log("working  ?");
 });
 module.exports = router;
