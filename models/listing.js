@@ -47,6 +47,8 @@ const listingSchema = new Schema({
       "Camping",
       "Farms",
       "Arctic",
+      "Forest",
+      "Island",
       "Miscellaneous",
     ],
     required: true,

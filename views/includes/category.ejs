@@ -2,7 +2,8 @@
   #filters {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    /* justify-content: center; */
+    align-items: center;
   }
   .filter {
     text-align: center;
@@ -19,42 +20,55 @@
   .filter p {
     font-size: 0.7rem;
   }
+  .tax-info {
+    display: none;
+  }
+
+  .tax-toggle {
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3rem;
+    padding: 0.5rem;
+    margin-left: 3.5rem;
+    display: flex;
+    align-items: center;
+  }
 </style>
 
 <div id="filters">
   <a href="/listings/category/Trending" class="listing-link">
     <div class="filter">
-      <div><i class="fa-solid fa-fire"></i></div>
+      <div><i class="fa-solid fa-fire fa-lg"></i></div>
       <p>Trending</p>
     </div>
   </a>
   <a href="/listings/category/Rooms" class="listing-link">
     <div class="filter">
-      <div><i class="fa-solid fa-bed"></i></div>
+      <div><i class="fa-solid fa-bed fa-lg"></i></div>
       <p>Rooms</p>
     </div>
   </a>
   <a href="/listings/category/Iconic Cities" class="listing-link">
     <div class="filter">
-      <div><i class="fa-solid fa-mountain-city"></i></div>
+      <div><i class="fa-solid fa-mountain-city fa-lg"></i></div>
       <p>Iconic Cities</p>
     </div></a
   >
   <a href="/listings/category/Castle" class="listing-link">
     <div class="filter">
-      <div><i class="fa-brands fa-fort-awesome"></i></div>
+      <div><i class="fa-brands fa-fort-awesome fa-lg"></i></div>
       <p>Castles</p>
     </div>
   </a>
   <a href="/listings/category/Beach" class="listing-link">
     <div class="filter">
-      <div><i class="fa-solid fa-person-swimming"></i></div>
+      <div><i class="fa-solid fa-person-swimming fa-lg"></i></div>
       <p>Beach</p>
     </div>
   </a>
   <a href="/listings/category/Camping" class="listing-link">
     <div class="filter">
-      <div><i class="fa-solid fa-campground"></i></div>
+      <div><i class="fa-solid fa-campground fa-lg"></i></div>
       <p>Camping</p>
     </div>
   </a>
@@ -66,14 +80,42 @@
   </a>
   <a href="/listings/category/Arctic" class="listing-link">
     <div class="filter">
-      <div><i class="fa-solid fa-igloo"></i></div>
+      <div><i class="fa-solid fa-igloo fa-lg"></i></div>
       <p>Arctic</p>
+    </div>
+  </a>
+
+  <a href="/listings/category/Forest" class="listing-link">
+    <div class="filter">
+      <div><i class="fa-solid fa-tree"></i></div>
+      <p>Forest</p>
+    </div>
+  </a>
+
+  <a href="/listings/category/Island" class="listing-link">
+    <div class="filter">
+      <div><i class="fa-solid fa-sailboat"></i></div>
+      <p>Island</p>
     </div>
   </a>
   <a href="/listings/category/Miscellaneous" class="listing-link">
     <div class="filter">
-      <div><i class="fa-solid fa-ellipsis"></i></div>
+      <div><i class="fa-solid fa-ellipsis fa-lg"></i></div>
       <p>Miscellaneous</p>
     </div>
   </a>
+
+  <div class="tax-toggle">
+    <div class="form-check-reverse form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="flexSwitchCheckDefault"
+      />
+      <label class="form-check-label" for="flexSwitchCheckDefault"
+        >Display total after taxes</label
+      >
+    </div>
+  </div>
 </div>
