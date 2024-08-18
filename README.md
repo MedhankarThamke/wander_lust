@@ -1,3 +1,3 @@
 # New Project
 
-This project is used to create the website for booking hotels, room, lodge etc..
+The objective of this project is to provide a platform where user can add their property for rent just like Airbnb.
