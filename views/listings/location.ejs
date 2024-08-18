@@ -1,0 +1,46 @@
+<!-- this is to show loaction wise listing  -->
+<% layout("/layouts/boilerplate.ejs") %>
+<%-include("../includes/category.ejs")%>
+<!--  -->
+<div class="row justify-content-center">
+  <div class="col-8">
+    <% if (successMessage) { %>
+    <div class="alert alert-success alert-dismissible" role="alert">
+      <%= successMessage %>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+      ></button>
+    </div>
+  </div>
+  <% } %>
+</div>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+  <!--  -->
+  <% if (listByLocation && listByLocation.length > 0) { %> <%
+  listByLocation.forEach(listing => { %>
+  <a href="/listings/<%= listing._id %>" class="listing-link">
+    <div class="card col listing-card">
+      <img
+        src="<%= listing.image.url %>"
+        class="card-img-top"
+        alt="listing"
+        style="height: 20rem"
+      />
+      <div class="card-img-overlay"></div>
+      <div class="card-body">
+        <p class="card-text">
+          <b><%= listing.title %> <br /></b>
+          &#8377;<%= listing.price.toLocaleString("en-IN") %>/night
+          <i class="tax-info">&nbsp;&nbsp; +18% GST</i>
+        </p>
+      </div>
+    </div>
+  </a>
+  <% }) %> <% } else { %>
+  <p>No listings found in this location.</p>
+  <% } %>
+</div>

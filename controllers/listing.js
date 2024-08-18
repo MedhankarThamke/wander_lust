@@ -32,6 +32,8 @@ module.exports.showListing = async (req, res) => {
 };
 
 module.exports.createListing = async (req, res, next) => {
+  req.body.listing.location = req.body.listing.location.toLowerCase();
+
   let response = await geocodingClient
     .forwardGeocode({
       query: req.body.listing.location,
@@ -67,15 +69,57 @@ module.exports.renderEditForm = async (req, res) => {
   res.render("listings/edit.ejs", { listing, originalImage });
 };
 
+// module.exports.updateListing = async (req, res) => {
+//   let { id } = req.params;
+//   let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }); //this is the destructing of lsiting object
+//   if (typeof req.file !== "undefined") {
+//     let url = req.file.path;
+//     let filename = req.file.filename;
+//     listing.image = { url, filename };
+//     await listing.save();
+//   }
+
+//   req.flash("success", "Listing Updated!");
+//   res.redirect(`/listings/${id}`);
+// };
+
 module.exports.updateListing = async (req, res) => {
   let { id } = req.params;
-  let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing }); //this is the destructing of lsiting object
-  if (typeof req.file !== "undefined") {
+
+  // Fetch the existing listing
+  let listing = await Listing.findById(id);
+
+  // If the location has changed, re-geocode the new location
+  if (
+    req.body.listing.location &&
+    req.body.listing.location !== listing.location
+  ) {
+    let response = await geocodingClient
+      .forwardGeocode({
+        query: req.body.listing.location.toLowerCase(), // Convert to lowercase
+        limit: 1,
+      })
+      .send();
+
+    // Update the geometry with the new coordinates
+    listing.geometry = response.body.features[0].geometry;
+  }
+
+  // Update the listing with new data
+  listing.set({
+    ...req.body.listing,
+    location: req.body.listing.location.toLowerCase(), // Ensure lowercase
+  });
+
+  // If a new image is uploaded, update the image
+  if (req.file) {
     let url = req.file.path;
     let filename = req.file.filename;
     listing.image = { url, filename };
-    await listing.save();
   }
+
+  // Save the updated listing
+  await listing.save();
 
   req.flash("success", "Listing Updated!");
   res.redirect(`/listings/${id}`);
@@ -97,6 +141,23 @@ module.exports.listingByCategory = async (req, res, next) => {
     res.render("listings/category.ejs", { details, listByCategory });
   } catch (err) {
     console.error("Error in listingByCategory:", err);
+    res.status(500).send("Something went wrong! Please try again later.");
+  }
+};
+
+module.exports.listingByLocation = async (req, res) => {
+  try {
+    let { destinationDetails } = req.body;
+    destinationDetails = destinationDetails.toLowerCase();
+    const listByLocation = await Listing.find({ location: destinationDetails });
+    const successMessage = `Listings for location: ${destinationDetails}`;
+    res.render("listings/location.ejs", {
+      destinationDetails,
+      listByLocation,
+      successMessage,
+    });
+  } catch (err) {
+    console.error("Error in listingBydestinationdetails:", err);
     res.status(500).send("Something went wrong! Please try again later.");
   }
 };

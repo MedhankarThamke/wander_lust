@@ -43,7 +43,7 @@
             class="dropdown-toggle form-control"
             required
           >
-            <option class="dropdown-item">Please choose an option</option>
+            <!-- <option class="dropdown-item">Please choose an option</option> -->
             <option value="Rooms" class="dropdown-item">Rooms</option>
             <option value="Iconic Cities" class="dropdown-item">
               Iconic Cities
@@ -55,7 +55,7 @@
             <option value="Arctic" class="dropdown-item">Arctic</option>
             <option value="Forest" class="dropdown-item">Forest</option>
             <option value="Island" class="dropdown-item">Island</option>
-            <option value="Miscellaneous" class="dropdown-item">
+            <option value="Miscellaneous" class="dropdown-item" selected>
               Miscellaneous
             </option>
           </select>
@@ -65,11 +65,13 @@
         <div class="mb-3">
           <label for="image" class="form-label">Upload Listing Image</label>
           <input
+            id="imageUpload"
             name="listing[image]"
             type="file"
             class="form-control"
             required
           />
+          <div class="invalid-feedback" id="imageError"></div>
         </div>
 
         <div class="row">
@@ -115,3 +117,18 @@
     </div>
   </div>
 </body>
+<script>
+  document
+    .getElementById("imageUpload")
+    .addEventListener("change", function () {
+      const file = this.files[0];
+      const imageError = document.getElementById("imageError");
+      imageError.textContent = "";
+
+      if (file && file.size > 20480) {
+        // 10KB in bytes
+        imageError.textContent = "Image size should not exceed 10KB.";
+        this.value = ""; // Clear the file input
+      }
+    });
+</script>

@@ -48,4 +48,6 @@ router.get(
   wrapAsync(listingController.listingByCategory)
 );
 
+router.post("/destination", wrapAsync(listingController.listingByLocation));
+
 module.exports = router;
