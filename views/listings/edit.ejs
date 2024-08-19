@@ -43,7 +43,13 @@
       <div class="mb-3">
         Original Listing Image
         <label for="image" class="form-label">Upload new Image</label>
-        <input name="listing[image]" type="file" class="form-control" />
+        <input
+          id="imageUpload"
+          name="listing[image]"
+          type="file"
+          class="form-control"
+        />
+        <div class="invalid-feedback" id="imageError"></div>
       </div>
 
       <div class="row">
@@ -88,3 +94,18 @@
     </form>
   </div>
 </div>
+<script>
+  document
+    .getElementById("imageUpload")
+    .addEventListener("change", function () {
+      const file = this.files[0];
+      const imageError = document.getElementById("imageError");
+      imageError.textContent = "";
+
+      if (file && file.size > 20480) {
+        // 10KB in bytes
+        imageError.textContent = "Image size should not exceed 20KB.";
+        this.value = ""; // Clear the file input
+      }
+    });
+</script>
